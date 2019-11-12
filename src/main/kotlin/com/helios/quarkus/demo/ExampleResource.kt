@@ -13,8 +13,6 @@ class ExampleResource(val dataSource: AgroalDataSource) {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     fun hello(): String {
-        val statement = dataSource.connection.createStatement()
-        statement.executeQuery("select * from dual")
         return "hello"
     }
 }
