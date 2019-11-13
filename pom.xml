@@ -10,11 +10,12 @@
         <maven.compiler.parameters>true</maven.compiler.parameters>
         <compiler-plugin.version>3.8.1</compiler-plugin.version>
         <surefire-plugin.version>2.22.0</surefire-plugin.version>
-        <maven.compiler.target>1.8</maven.compiler.target>
         <quarkus.version>0.28.1</quarkus.version>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <kotlin.version>1.3.50</kotlin.version>
+        <ebean.version>12.1.3</ebean.version>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
     </properties>
     <dependencyManagement>
@@ -71,11 +72,17 @@
         -->
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-hibernate-orm-panache</artifactId>
+            <artifactId>quarkus-jdbc-postgresql</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-jdbc-postgresql</artifactId>
+            <groupId>io.ebean</groupId>
+            <artifactId>ebean</artifactId>
+            <version>${ebean.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.ebean</groupId>
+            <artifactId>ebean-querybean</artifactId>
+            <version>${ebean.version}</version>
         </dependency>
     </dependencies>
     <build>
@@ -144,8 +151,22 @@
                     </compilerPlugins>
                     <pluginOptions>
                         <option>all-open:annotation=javax.ws.rs.Path</option>
+                        <option>all-open:annotation=javax.persistence.Entity</option>
                     </pluginOptions>
                     <jvmTarget>1.8</jvmTarget>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>io.repaint.maven</groupId>
+                <artifactId>tiles-maven-plugin</artifactId>
+                <version>2.12</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <tiles>
+                        <tile>io.ebean.tile:enhancement:${ebean.version}</tile> <!-- ebean enhancement -->
+                        <tile>io.ebean.tile:kotlin-kapt:1.5</tile> <!-- kotlin compile with query bean generation -->
+                        <!-- other tiles ... -->
+                    </tiles>
                 </configuration>
             </plugin>
         </plugins>
