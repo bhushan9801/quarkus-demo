@@ -1,68 +1,85 @@
 package com.helios.quarkus.demo.domain
 
-import io.ebean.Model
+import com.helios.quarkus.demo.types.TsVectorType
+import com.vladmihalcea.hibernate.type.array.StringArrayType
+import org.hibernate.annotations.Type
+import org.hibernate.annotations.TypeDef
+import org.hibernate.annotations.TypeDefs
 import java.time.Instant
 import java.time.Year
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
-@Table(name = "film", schema = "public", catalog = "imdb")
-open class Film : Model() {
+@Table(name = "film")
+@TypeDefs(
+        TypeDef(name = "string-array", typeClass = StringArrayType::class),
+        TypeDef(name = "tsvector", typeClass = TsVectorType::class)
+)
+open class Film {
     @field:Id
     @field:Column(name = "film_id", nullable = false, insertable = false, updatable = false)
     var filmId: Int? = null
-    @field:Basic
+
     @field:Column(name = "title", nullable = false)
     var title: String? = null
-    @field:Basic
+
     @field:Column(name = "description", nullable = true)
     var description: String? = null
-    @field:Basic
+
     @field:Column(name = "release_year", nullable = true)
-    var releaseYear: Year? = null
-    @field:Basic
+    var releaseYear: Int? = null
+
     @field:Column(name = "language_id", nullable = false, insertable = false, updatable = false)
-    var languageId: Short? = null
-    @field:Basic
+    var languageId: Int? = null
+
     @field:Column(name = "original_language_id", nullable = true, insertable = false, updatable = false)
-    var originalLanguageId: Short? = null
-    @field:Basic
+    var originalLanguageId: Int? = null
+
     @field:Column(name = "rental_duration", nullable = false)
-    var rentalDuration: Short? = null
-    @field:Basic
+    var rentalDuration: Int? = null
+
     @field:Column(name = "rental_rate", nullable = false)
     var rentalRate: java.math.BigDecimal? = null
-    @field:Basic
+
     @field:Column(name = "length", nullable = true)
-    var length: Short? = null
-    @field:Basic
+    var length: Int? = null
+
     @field:Column(name = "replacement_cost", nullable = false)
     var replacementCost: java.math.BigDecimal? = null
-    @field:Basic
+
     @field:Column(name = "rating", nullable = true)
     var rating: String? = null
-    @field:Basic
+
     @field:Column(name = "last_update", nullable = false)
     var lastUpdate: Instant? = null
-    @field:Basic
-    @field:Column(name = "special_features", nullable = true)
-    var specialFeatures: String? = null
-    @field:Basic
+
+    @field:Column(name = "special_features", nullable = true, columnDefinition = "text[]")
+    @field:Type(type = "string-array")
+    var specialFeatures: Array<String>? = null
+
     @field:Column(name = "fulltext", nullable = false)
+    @field:Type(type = "tsvector")
     var fulltext: String? = null
 
-    @field:ManyToOne(fetch = FetchType.LAZY)
+    @field:ManyToOne(fetch = FetchType.LAZY, optional = false)
     @field:JoinColumn(name = "language_id", referencedColumnName = "language_id")
     var refLanguage: Language? = null
-    @field:ManyToOne(fetch = FetchType.LAZY)
+    @field:ManyToOne(fetch = FetchType.LAZY, optional = false)
     @field:JoinColumn(name = "original_language_id", referencedColumnName = "language_id")
     var orgLanguage: Language? = null
-    @field:OneToMany(mappedBy = "refFilm")
-    var refFilmActors: List<FilmActor>? = null
-    @field:OneToMany(mappedBy = "refFilm")
-    var refFilmCategories: List<FilmCategory>? = null
-    @field:OneToMany(mappedBy = "refFilm")
-    var refInventories: List<Inventory>? = null
+    @field:OneToMany(mappedBy = "refFilm", fetch = FetchType.LAZY)
+    var refFilmActors = mutableListOf<FilmActor>()
+    @field:OneToMany(mappedBy = "refFilm", fetch = FetchType.LAZY)
+    var refFilmCategories = mutableListOf<FilmCategory>()
+    @field:OneToMany(mappedBy = "refFilm", fetch = FetchType.LAZY)
+    var refInventories = mutableListOf<Inventory>()
 
     override fun toString(): String =
             "Entity of type: ${javaClass.name} ( " +
@@ -82,31 +99,19 @@ open class Film : Model() {
                     "fulltext = $fulltext " +
                     ")"
 
-    // constant value returned to avoid entity inequality to itself before and after it's update/merge
-    override fun hashCode(): Int = 42
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
+
         other as Film
 
         if (filmId != other.filmId) return false
-        if (title != other.title) return false
-        if (description != other.description) return false
-        if (releaseYear != other.releaseYear) return false
-        if (languageId != other.languageId) return false
-        if (originalLanguageId != other.originalLanguageId) return false
-        if (rentalDuration != other.rentalDuration) return false
-        if (rentalRate != other.rentalRate) return false
-        if (length != other.length) return false
-        if (replacementCost != other.replacementCost) return false
-        if (rating != other.rating) return false
-        if (lastUpdate != other.lastUpdate) return false
-        if (specialFeatures != other.specialFeatures) return false
-        if (fulltext != other.fulltext) return false
 
         return true
     }
 
+    override fun hashCode(): Int {
+        return filmId ?: 0
+    }
 }
 

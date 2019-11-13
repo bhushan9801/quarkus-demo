@@ -1,56 +1,62 @@
 package com.helios.quarkus.demo.domain
 
-import io.ebean.Model
 import java.time.Instant
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
-@Table(name = "staff", schema = "public", catalog = "imdb")
-open class Staff : Model() {
+@Table(name = "staff")
+open class Staff {
     @field:Id
     @field:Column(name = "staff_id", nullable = false, insertable = false, updatable = false)
     var staffId: Int? = null
-    @field:Basic
+
     @field:Column(name = "first_name", nullable = false)
     var firstName: String? = null
-    @field:Basic
+
     @field:Column(name = "last_name", nullable = false)
     var lastName: String? = null
-    @field:Basic
+
     @field:Column(name = "address_id", nullable = false, insertable = false, updatable = false)
-    var addressId: Short? = null
-    @field:Basic
+    var addressId: Int? = null
+
     @field:Column(name = "email", nullable = true)
     var email: String? = null
-    @field:Basic
+
     @field:Column(name = "store_id", nullable = false, insertable = false, updatable = false)
-    var storeId: Short? = null
-    @field:Basic
+    var storeId: Int? = null
+
     @field:Column(name = "active", nullable = false)
     var active: Boolean? = null
-    @field:Basic
+
     @field:Column(name = "username", nullable = false)
     var username: String? = null
-    @field:Basic
+
     @field:Column(name = "password", nullable = true)
     var password: String? = null
-    @field:Basic
+
     @field:Column(name = "last_update", nullable = false)
     var lastUpdate: Instant? = null
-    @field:Basic
+
     @field:Column(name = "picture", nullable = true)
     var picture: ByteArray? = null
 
-    @field:OneToMany(mappedBy = "refStaff")
-    var refRentals: List<Rental>? = null
+    @field:OneToMany(mappedBy = "refStaff", fetch = FetchType.LAZY)
+    var refRentals = mutableListOf<Rental>()
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "address_id", referencedColumnName = "address_id")
     var refAddress: Address? = null
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "store_id", referencedColumnName = "store_id")
     var refStore: Store? = null
-    @field:OneToMany(mappedBy = "refStaff")
-    var refStores: List<Store>? = null
+    @field:OneToMany(mappedBy = "refStaff", fetch = FetchType.LAZY)
+    var refStores = mutableListOf<Store>()
 
     override fun toString(): String =
             "Entity of type: ${javaClass.name} ( " +

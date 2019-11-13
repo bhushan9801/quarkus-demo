@@ -1,24 +1,28 @@
 package com.helios.quarkus.demo.domain
 
-import io.ebean.Model
 import java.time.Instant
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.Id
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
-@Table(name = "country", schema = "public", catalog = "imdb")
-open class Country : Model() {
+@Table(name = "country")
+open class Country {
     @field:Id
     @field:Column(name = "country_id", nullable = false, insertable = false, updatable = false)
     var countryId: Int? = null
-    @field:Basic
+
     @field:Column(name = "country", nullable = false)
     var country: String? = null
-    @field:Basic
+
     @field:Column(name = "last_update", nullable = false)
     var lastUpdate: Instant? = null
 
-    @field:OneToMany(mappedBy = "refCountry")
-    var refCities: List<City>? = null
+    @field:OneToMany(mappedBy = "refCountry", fetch = FetchType.LAZY)
+    var refCities = mutableListOf<City>()
 
     override fun toString(): String =
             "Entity of type: ${javaClass.name} ( " +

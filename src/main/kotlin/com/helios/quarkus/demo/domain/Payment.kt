@@ -1,28 +1,30 @@
 package com.helios.quarkus.demo.domain
 
-import io.ebean.Model
 import java.time.Instant
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
-@Table(name = "payment", schema = "public", catalog = "imdb")
-open class Payment : Model() {
+@Table(name = "payment")
+open class Payment {
     @field:Id
     @field:Column(name = "payment_id", nullable = false)
     var paymentId: Int? = null
-    @field:Basic
+
     @field:Column(name = "customer_id", nullable = false)
-    var customerId: Short? = null
-    @field:Basic
+    var customerId: Int? = null
+
     @field:Column(name = "staff_id", nullable = false)
-    var staffId: Short? = null
-    @field:Basic
+    var staffId: Int? = null
+
     @field:Column(name = "rental_id", nullable = false)
     var rentalId: Int? = null
-    @field:Basic
+
     @field:Column(name = "amount", nullable = false)
     var amount: java.math.BigDecimal? = null
-    @field:Basic
+
     @field:Column(name = "payment_date", nullable = false)
     var paymentDate: Instant? = null
 

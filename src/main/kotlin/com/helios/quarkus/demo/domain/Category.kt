@@ -1,24 +1,23 @@
 package com.helios.quarkus.demo.domain
 
-import io.ebean.Model
 import java.time.Instant
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
-@Table(name = "category", schema = "public", catalog = "imdb")
-open class Category : Model() {
+@Table(name = "category")
+open class Category {
     @field:Id
     @field:Column(name = "category_id", nullable = false, insertable = false, updatable = false)
     var categoryId: Int? = null
-    @field:Basic
+
     @field:Column(name = "name", nullable = false)
     var name: String? = null
-    @field:Basic
+
     @field:Column(name = "last_update", nullable = false)
     var lastUpdate: Instant? = null
-
-    @field:OneToMany(mappedBy = "refCategory")
-    var refFilmCategories: List<FilmCategory>? = null
 
     override fun toString(): String =
             "Entity of type: ${javaClass.name} ( " +

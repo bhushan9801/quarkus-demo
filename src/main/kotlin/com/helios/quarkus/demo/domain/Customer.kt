@@ -1,40 +1,46 @@
 package com.helios.quarkus.demo.domain
 
-import io.ebean.Model
 import java.time.Instant
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
-@Table(name = "customer", schema = "public", catalog = "imdb")
-open class Customer : Model() {
+@Table(name = "customer")
+open class Customer {
     @field:Id
     @field:Column(name = "customer_id", nullable = false, insertable = false, updatable = false)
     var customerId: Int? = null
-    @field:Basic
+
     @field:Column(name = "store_id", nullable = false, insertable = false, updatable = false)
-    var storeId: Short? = null
-    @field:Basic
+    var storeId: Int? = null
+
     @field:Column(name = "first_name", nullable = false)
     var firstName: String? = null
-    @field:Basic
+
     @field:Column(name = "last_name", nullable = false)
     var lastName: String? = null
-    @field:Basic
+
     @field:Column(name = "email", nullable = true)
     var email: String? = null
-    @field:Basic
+
     @field:Column(name = "address_id", nullable = false, insertable = false, updatable = false)
-    var addressId: Short? = null
-    @field:Basic
+    var addressId: Int? = null
+
     @field:Column(name = "activebool", nullable = false)
     var activebool: Boolean? = null
-    @field:Basic
+
     @field:Column(name = "create_date", nullable = false)
     var createDate: java.sql.Date? = null
-    @field:Basic
+
     @field:Column(name = "last_update", nullable = true)
     var lastUpdate: Instant? = null
-    @field:Basic
+
     @field:Column(name = "active", nullable = true)
     var active: Int? = null
 
@@ -44,8 +50,8 @@ open class Customer : Model() {
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "address_id", referencedColumnName = "address_id")
     var refAddress: Address? = null
-    @field:OneToMany(mappedBy = "refCustomer")
-    var refRentals: List<Rental>? = null
+    @field:OneToMany(mappedBy = "refCustomer", fetch = FetchType.LAZY)
+    var refRentals = mutableListOf<Rental>()
 
     override fun toString(): String =
             "Entity of type: ${javaClass.name} ( " +

@@ -1,27 +1,30 @@
 package com.helios.quarkus.demo.domain
 
-import io.ebean.Model
 import java.time.Instant
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.Table
 
 @Entity
-@Table(name = "city", schema = "public", catalog = "imdb")
-open class City : Model() {
+@Table(name = "city")
+open class City {
     @field:Id
     @field:Column(name = "city_id", nullable = false, insertable = false, updatable = false)
     var cityId: Int? = null
-    @field:Basic
+
     @field:Column(name = "city", nullable = false)
     var city: String? = null
-    @field:Basic
+
     @field:Column(name = "country_id", nullable = false, insertable = false, updatable = false)
-    var countryId: Short? = null
-    @field:Basic
+    var countryId: Int? = null
+
     @field:Column(name = "last_update", nullable = false)
     var lastUpdate: Instant? = null
 
-    @field:OneToMany(mappedBy = "refCity")
-    var refAddresses: List<Address>? = null
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "country_id", referencedColumnName = "country_id")
     var refCountry: Country? = null

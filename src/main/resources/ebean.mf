@@ -1,4 +1,0 @@
-entity-packages: com.helios.quarkus.demo.domain
-transactional-packages: none
-querybean-packages: none
-debug-level: 1

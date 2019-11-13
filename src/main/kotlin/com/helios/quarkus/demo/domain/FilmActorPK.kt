@@ -1,18 +1,20 @@
 package com.helios.quarkus.demo.domain
 
 import javax.persistence.Column
-import javax.persistence.Embeddable
+import javax.persistence.Id
 
-@Embeddable
 open class FilmActorPK : java.io.Serializable {
+    @field:Id
     @field:Column(name = "actor_id", nullable = false, insertable = false, updatable = false)
-    var actorId: Short? = null
+    var actorId: Int? = null
+    @field:Id
     @field:Column(name = "film_id", nullable = false, insertable = false, updatable = false)
-    var filmId: Short? = null
+    var filmId: Int? = null
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
+
         other as FilmActorPK
 
         if (actorId != other.actorId) return false
@@ -21,7 +23,9 @@ open class FilmActorPK : java.io.Serializable {
         return true
     }
 
-    // constant value returned to avoid entity inequality to itself before and after it's update/merge
-    override fun hashCode(): Int = 42
-
+    override fun hashCode(): Int {
+        var result = actorId ?: 0
+        result = 31 * result + (filmId ?: 0)
+        return result
+    }
 }

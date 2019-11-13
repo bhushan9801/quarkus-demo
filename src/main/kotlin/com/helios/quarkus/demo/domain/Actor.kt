@@ -1,27 +1,26 @@
 package com.helios.quarkus.demo.domain
 
-import io.ebean.Model
 import java.time.Instant
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
-@Table(name = "actor", schema = "public", catalog = "imdb")
-open class Actor : Model() {
+@Table(name = "actor")
+open class Actor {
     @field:Id
     @field:Column(name = "actor_id", nullable = false, insertable = false, updatable = false)
     var actorId: Int? = null
-    @field:Basic
+
     @field:Column(name = "first_name", nullable = false)
     var firstName: String? = null
-    @field:Basic
+
     @field:Column(name = "last_name", nullable = false)
     var lastName: String? = null
-    @field:Basic
+
     @field:Column(name = "last_update", nullable = false)
     var lastUpdate: Instant? = null
-
-    @field:OneToMany(mappedBy = "refActor")
-    var refFilmActors: List<FilmActor>? = null
 
     override fun toString(): String =
             "Entity of type: ${javaClass.name} ( " +
@@ -46,6 +45,5 @@ open class Actor : Model() {
 
         return true
     }
-
 }
 

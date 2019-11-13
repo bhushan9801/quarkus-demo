@@ -1,46 +1,52 @@
 package com.helios.quarkus.demo.domain
 
-import io.ebean.Model
 import java.time.Instant
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
-@Table(name = "address", schema = "public", catalog = "imdb")
-open class Address : Model() {
+@Table(name = "address")
+open class Address {
     @field:Id
     @field:Column(name = "address_id", nullable = false, insertable = false, updatable = false)
     var addressId: Int? = null
-    @field:Basic
+
     @field:Column(name = "address", nullable = false)
     var address: String? = null
-    @field:Basic
+
     @field:Column(name = "address2", nullable = true)
     var address2: String? = null
-    @field:Basic
+
     @field:Column(name = "district", nullable = false)
     var district: String? = null
-    @field:Basic
+
     @field:Column(name = "city_id", nullable = false, insertable = false, updatable = false)
-    var cityId: Short? = null
-    @field:Basic
+    var cityId: Int? = null
+
     @field:Column(name = "postal_code", nullable = true)
     var postalCode: String? = null
-    @field:Basic
+
     @field:Column(name = "phone", nullable = false)
     var phone: String? = null
-    @field:Basic
+
     @field:Column(name = "last_update", nullable = false)
     var lastUpdate: Instant? = null
 
-    @field:ManyToOne(fetch = FetchType.LAZY)
+    @field:ManyToOne(fetch = FetchType.LAZY, optional = false)
     @field:JoinColumn(name = "city_id", referencedColumnName = "city_id")
     var refCity: City? = null
-    @field:OneToMany(mappedBy = "refAddress")
-    var refCustomers: List<Customer>? = null
-    @field:OneToMany(mappedBy = "refAddress")
-    var refStaffs: List<Staff>? = null
-    @field:OneToMany(mappedBy = "refAddress")
-    var refStores: List<Store>? = null
+    @field:OneToMany(mappedBy = "refAddress", fetch = FetchType.LAZY)
+    var refCustomers = mutableListOf<Customer>()
+    @field:OneToMany(mappedBy = "refAddress", fetch = FetchType.LAZY)
+    var refStaffs = mutableListOf<Staff>()
+    @field:OneToMany(mappedBy = "refAddress", fetch = FetchType.LAZY)
+    var refStores = mutableListOf<Store>()
 
     override fun toString(): String =
             "Entity of type: ${javaClass.name} ( " +

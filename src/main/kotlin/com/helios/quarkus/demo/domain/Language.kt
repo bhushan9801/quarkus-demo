@@ -1,19 +1,21 @@
 package com.helios.quarkus.demo.domain
 
-import io.ebean.Model
 import java.time.Instant
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.Table
 
 @Entity
-@Table(name = "language", schema = "public", catalog = "imdb")
-open class Language : Model() {
+@Table(name = "language")
+open class Language {
     @field:Id
     @field:Column(name = "language_id", nullable = false, insertable = false, updatable = false)
     var languageId: Int? = null
-    @field:Basic
+
     @field:Column(name = "name", nullable = false)
     var name: String? = null
-    @field:Basic
+
     @field:Column(name = "last_update", nullable = false)
     var lastUpdate: Instant? = null
 

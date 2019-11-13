@@ -1,31 +1,37 @@
 package com.helios.quarkus.demo.domain
 
-import io.ebean.Model
 import java.time.Instant
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
+import javax.persistence.Table
 
 @Entity
-@Table(name = "store", schema = "public", catalog = "imdb")
-open class Store : Model() {
+@Table(name = "store")
+open class Store {
     @field:Id
     @field:Column(name = "store_id", nullable = false, insertable = false, updatable = false)
     var storeId: Int? = null
-    @field:Basic
+
     @field:Column(name = "manager_staff_id", nullable = false, insertable = false, updatable = false)
-    var managerStaffId: Short? = null
-    @field:Basic
+    var managerStaffId: Int? = null
+
     @field:Column(name = "address_id", nullable = false, insertable = false, updatable = false)
-    var addressId: Short? = null
-    @field:Basic
+    var addressId: Int? = null
+
     @field:Column(name = "last_update", nullable = false)
     var lastUpdate: Instant? = null
 
-    @field:OneToMany(mappedBy = "refStore")
-    var refCustomers: List<Customer>? = null
-    @field:OneToMany(mappedBy = "refStore")
-    var refInventories: List<Inventory>? = null
-    @field:OneToMany(mappedBy = "refStore")
-    var refStaffs: List<Staff>? = null
+    @field:OneToMany(mappedBy = "refStore", fetch = FetchType.LAZY)
+    var refCustomers = mutableListOf<Customer>()
+    @field:OneToMany(mappedBy = "refStore", fetch = FetchType.LAZY)
+    var refInventories = mutableListOf<Inventory>()
+    @field:OneToMany(mappedBy = "refStore", fetch = FetchType.LAZY)
+    var refStaffs = mutableListOf<Staff>()
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "manager_staff_id", referencedColumnName = "staff_id")
     var refStaff: Staff? = null

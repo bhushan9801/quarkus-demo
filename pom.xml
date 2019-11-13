@@ -75,14 +75,13 @@
             <artifactId>quarkus-jdbc-postgresql</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.ebean</groupId>
-            <artifactId>ebean</artifactId>
-            <version>${ebean.version}</version>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-hibernate-orm</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.ebean</groupId>
-            <artifactId>ebean-querybean</artifactId>
-            <version>${ebean.version}</version>
+            <groupId>com.vladmihalcea</groupId>
+            <artifactId>hibernate-types-52</artifactId>
+            <version>2.7.1</version>
         </dependency>
     </dependencies>
     <build>
@@ -154,19 +153,6 @@
                         <option>all-open:annotation=javax.persistence.Entity</option>
                     </pluginOptions>
                     <jvmTarget>1.8</jvmTarget>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>io.repaint.maven</groupId>
-                <artifactId>tiles-maven-plugin</artifactId>
-                <version>2.12</version>
-                <extensions>true</extensions>
-                <configuration>
-                    <tiles>
-                        <tile>io.ebean.tile:enhancement:${ebean.version}</tile> <!-- ebean enhancement -->
-                        <tile>io.ebean.tile:kotlin-kapt:1.5</tile> <!-- kotlin compile with query bean generation -->
-                        <!-- other tiles ... -->
-                    </tiles>
                 </configuration>
             </plugin>
         </plugins>

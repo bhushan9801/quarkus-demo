@@ -1,31 +1,36 @@
 package com.helios.quarkus.demo.domain
 
-import io.ebean.Model
 import java.time.Instant
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.Table
 
 @Entity
-@Table(name = "rental", schema = "public", catalog = "imdb")
-open class Rental : Model() {
+@Table(name = "rental")
+open class Rental {
     @field:Id
     @field:Column(name = "rental_id", nullable = false, insertable = false, updatable = false)
     var rentalId: Int? = null
-    @field:Basic
+
     @field:Column(name = "rental_date", nullable = false)
     var rentalDate: Instant? = null
-    @field:Basic
+
     @field:Column(name = "inventory_id", nullable = false, insertable = false, updatable = false)
     var inventoryId: Int? = null
-    @field:Basic
+
     @field:Column(name = "customer_id", nullable = false, insertable = false, updatable = false)
-    var customerId: Short? = null
-    @field:Basic
+    var customerId: Int? = null
+
     @field:Column(name = "return_date", nullable = true)
     var returnDate: Instant? = null
-    @field:Basic
+
     @field:Column(name = "staff_id", nullable = false, insertable = false, updatable = false)
-    var staffId: Short? = null
-    @field:Basic
+    var staffId: Int? = null
+
     @field:Column(name = "last_update", nullable = false)
     var lastUpdate: Instant? = null
 
