@@ -3,4 +3,4 @@ package com.helios.quarkus.demo
 import io.quarkus.test.junit.NativeImageTest
 
 @NativeImageTest
-open class NativeExampleResourceIT : ExampleResourceTest()
+open class NativeMetricsResourceIT : MetricsResourceTest()
