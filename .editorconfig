@@ -1,0 +1,28 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+tab_width = 2
+insert_final_newline = false
+max_line_length = 120
+
+[*.css]
+trim_trailing_whitespace = true
+
+[*.{htm, html}]
+trim_trailing_whitespace = true
+
+[*.{kt, kts, java}]
+indent_size = 4
+
+[*.{cjs, js, json, jsx, mjs, ts, tsx, vue}]
+indent_size = 2
+
+[*.{yaml, yml}]
+indent_size = 2
+
+[*.{bat, cmd}]
+end_of_line = crlf
