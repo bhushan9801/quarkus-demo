@@ -1,6 +1,7 @@
 package com.helios.quarkus.demo.domain
 
 import com.helios.quarkus.demo.dto.ActorVO
+import com.helios.quarkus.demo.dto.FilmVO
 import com.helios.quarkus.demo.dto.StaffVO
 import com.helios.quarkus.demo.dto.StoreVO
 import org.mapstruct.Mapper
@@ -14,4 +15,5 @@ interface Mappers {
     fun staffToVo(source: Staff): StaffVO
 
     fun storeToVo(source: Store): StoreVO
+    fun filmToVO(source: Film): FilmVO
 }

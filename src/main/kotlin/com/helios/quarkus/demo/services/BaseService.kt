@@ -17,7 +17,7 @@ abstract class BaseService<T, V>(private val em: EntityManager, private val claz
         return convertList(buildCriteriaQuery(page).resultList)
     }
 
-    protected fun buildCriteriaQuery(page: Page): TypedQuery<T> {
+    private fun buildCriteriaQuery(page: Page): TypedQuery<T> {
         val cb = em.criteriaBuilder
         val query = cb.createQuery(clazz)
         val root = query.from(clazz)
@@ -36,7 +36,7 @@ abstract class BaseService<T, V>(private val em: EntityManager, private val claz
         return tQuery
     }
 
-    protected fun convertList(source: List<T>): List<V> {
+    private fun convertList(source: List<T>): List<V> {
         val list = mutableListOf<V>()
         source.forEach { list.add(convert(it)) }
         return list
