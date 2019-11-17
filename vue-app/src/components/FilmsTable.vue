@@ -20,10 +20,27 @@
 </template>
 
 <script>
+    import Repository from "../repository/Repository";
+
     export default {
         name: "films-table",
-        props: {
-            films: Array
+        data() {
+            return {
+                films: []
+            };
+        },
+        created() {
+            this.getFilms()
+        },
+        methods: {
+            async getFilms() {
+                try {
+                    const {data} = await Repository.get("/films");
+                    this.films = data
+                } catch (error) {
+                    console.log(error);
+                }
+            }
         }
     };
 </script>
