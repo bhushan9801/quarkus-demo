@@ -42,7 +42,7 @@ class Sort(private val fieldSpec: String) {
         else -> Order.ASC
     }
 
-    fun trimOrdering(): String {
+    private fun trimOrdering(): String {
         return fieldSpec.trimStart('+', '-')
     }
 
