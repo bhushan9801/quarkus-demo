@@ -6,7 +6,7 @@ import org.hibernate.annotations.Type
 import org.hibernate.annotations.TypeDef
 import org.hibernate.annotations.TypeDefs
 import java.time.Instant
-import java.time.Year
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
@@ -19,8 +19,8 @@ import javax.persistence.Table
 @Entity
 @Table(name = "film")
 @TypeDefs(
-        TypeDef(name = "string-array", typeClass = StringArrayType::class),
-        TypeDef(name = "tsvector", typeClass = TsVectorType::class)
+    TypeDef(name = "string-array", typeClass = StringArrayType::class),
+    TypeDef(name = "tsvector", typeClass = TsVectorType::class)
 )
 open class Film {
     @field:Id
@@ -74,30 +74,30 @@ open class Film {
     @field:ManyToOne(fetch = FetchType.LAZY, optional = false)
     @field:JoinColumn(name = "original_language_id", referencedColumnName = "language_id")
     var orgLanguage: Language? = null
+    @field:OneToMany(mappedBy = "film", fetch = FetchType.LAZY, orphanRemoval = true)
+    var filmActors = mutableListOf<FilmActor>()
+    @field:OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
+    var filmCategories = mutableListOf<FilmCategory>()
     @field:OneToMany(mappedBy = "refFilm", fetch = FetchType.LAZY)
-    var refFilmActors = mutableListOf<FilmActor>()
-    @field:OneToMany(mappedBy = "refFilm", fetch = FetchType.LAZY)
-    var refFilmCategories = mutableListOf<FilmCategory>()
-    @field:OneToMany(mappedBy = "refFilm", fetch = FetchType.LAZY)
-    var refInventories = mutableListOf<Inventory>()
+    var inventories = mutableListOf<Inventory>()
 
     override fun toString(): String =
-            "Entity of type: ${javaClass.name} ( " +
-                    "filmId = $filmId " +
-                    "title = $title " +
-                    "description = $description " +
-                    "releaseYear = $releaseYear " +
-                    "languageId = $languageId " +
-                    "originalLanguageId = $originalLanguageId " +
-                    "rentalDuration = $rentalDuration " +
-                    "rentalRate = $rentalRate " +
-                    "length = $length " +
-                    "replacementCost = $replacementCost " +
-                    "rating = $rating " +
-                    "lastUpdate = $lastUpdate " +
-                    "specialFeatures = $specialFeatures " +
-                    "fulltext = $fulltext " +
-                    ")"
+        "Entity of type: ${javaClass.name} ( " +
+            "filmId = $filmId " +
+            "title = $title " +
+            "description = $description " +
+            "releaseYear = $releaseYear " +
+            "languageId = $languageId " +
+            "originalLanguageId = $originalLanguageId " +
+            "rentalDuration = $rentalDuration " +
+            "rentalRate = $rentalRate " +
+            "length = $length " +
+            "replacementCost = $replacementCost " +
+            "rating = $rating " +
+            "lastUpdate = $lastUpdate " +
+            "specialFeatures = $specialFeatures " +
+            "fulltext = $fulltext " +
+            ")"
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -16,4 +16,5 @@ class FilmVO(var filmId: Long? = null,
              var rating: String? = null,
              var lastUpdate: Instant? = null,
              var specialFeatures: Array<String>? = null,
-             var fulltext: String? = null)
+             var fulltext: String? = null,
+             var filmActors: List<ActorVO>? = null)

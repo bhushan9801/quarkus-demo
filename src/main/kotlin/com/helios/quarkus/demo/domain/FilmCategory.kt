@@ -1,6 +1,8 @@
 package com.helios.quarkus.demo.domain
 
+import java.time.Instant
 import javax.persistence.Column
+import javax.persistence.EmbeddedId
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.Id
@@ -21,20 +23,20 @@ open class FilmCategory {
     var categoryId: Int? = null
 
     @field:Column(name = "last_update", nullable = false)
-    var lastUpdate: java.sql.Timestamp? = null
+    var lastUpdate: Instant? = null
 
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "film_id", referencedColumnName = "film_id")
-    var refFilm: Film? = null
+    var film: Film? = null
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    var refCategory: Category? = null
+    var category: Category? = null
 
     override fun toString(): String =
-            "Entity of type: ${javaClass.name} ( " +
-                    "filmId = $filmId " +
-                    "lastUpdate = $lastUpdate " +
-                    ")"
+        "Entity of type: ${javaClass.name} ( " +
+            "filmId = $filmId " +
+            "lastUpdate = $lastUpdate " +
+            ")"
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -42,15 +44,15 @@ open class FilmCategory {
 
         other as FilmCategory
 
-        if (filmId != other.filmId) return false
-        if (categoryId != other.categoryId) return false
+        if (film != other.film) return false
+        if (category != other.category) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = filmId ?: 0
-        result = 31 * result + (categoryId ?: 0)
+        var result = film?.hashCode() ?: 0
+        result = 31 * result + (category?.hashCode() ?: 0)
         return result
     }
 

@@ -13,7 +13,6 @@ abstract class BaseService<T, V>(private val em: EntityManager, private val claz
     }
 
     fun list(page: Page): List<V> {
-        val query = buildCriteriaQuery(page)
         return convertList(buildCriteriaQuery(page).resultList)
     }
 

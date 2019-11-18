@@ -1,19 +1,13 @@
 <template>
   <div id="app" class="container">
     <img alt="Vue logo" src="./assets/logo.png"/>
-    <films-table></films-table>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-    // import HelloWorld from './components/HelloWorld.vue'
-    import FilmsTable from "./components/FilmsTable.vue";
-
     export default {
         name: "app",
-        components: {
-            FilmsTable
-        }
     };
 </script>
 
