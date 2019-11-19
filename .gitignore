@@ -38,6 +38,7 @@ release.properties
 .DS_Store
 node_modules
 /vue-app/dist
+/out
 
 # local env files
 .env.local

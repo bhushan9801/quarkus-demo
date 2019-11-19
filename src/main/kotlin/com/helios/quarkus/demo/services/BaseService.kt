@@ -1,10 +1,12 @@
 package com.helios.quarkus.demo.services
 
 import com.helios.quarkus.demo.domain.Page
+import com.helios.quarkus.demo.domain.PagedResult
 import com.helios.quarkus.demo.domain.Sort
 import javax.persistence.EntityManager
 import javax.persistence.TypedQuery
 import javax.persistence.criteria.Path
+import javax.validation.Valid
 
 abstract class BaseService<T, V>(private val em: EntityManager, private val clazz: Class<T>) {
 
@@ -12,8 +14,8 @@ abstract class BaseService<T, V>(private val em: EntityManager, private val claz
         return convert(em.find(clazz, id))
     }
 
-    fun list(page: Page): List<V> {
-        return convertList(buildCriteriaQuery(page).resultList)
+    fun list(page: Page): PagedResult<V> {
+        return PagedResult(convertList(buildCriteriaQuery(page).resultList), getTotalCount(), page)
     }
 
     private fun buildCriteriaQuery(page: Page): TypedQuery<T> {
@@ -33,6 +35,13 @@ abstract class BaseService<T, V>(private val em: EntityManager, private val claz
         tQuery.firstResult = page.offset()
         tQuery.maxResults = page.size
         return tQuery
+    }
+
+    private fun getTotalCount(): Long {
+        val cb = em.criteriaBuilder
+        val query = cb.createQuery(Long::class.java)
+        query.select(cb.count(query.from(clazz)))
+        return em.createQuery(query).singleResult
     }
 
     private fun convertList(source: List<T>): List<V> {

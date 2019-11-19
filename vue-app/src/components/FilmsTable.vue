@@ -1,6 +1,9 @@
 <template>
-  <div id="films-table">
-    <b-table bordered hover :items="films" :fields="fields"></b-table>
+  <div id="films-table" class="overflow-auto">
+    <b-pagination v-model="page.pageNumber" :total-rows="total" :per-page="page.size" aria-controls="film-table"
+                  @input="getFilms(page.pageNumber)"></b-pagination>
+
+    <b-table id="film-table" bordered hover :items="films" :fields="fields"></b-table>
   </div>
 </template>
 
@@ -14,17 +17,21 @@
         data() {
             return {
                 films: [],
-                fields: []
+                fields: [],
+                page: {},
+                total: 0
             };
         },
         created() {
             this.getFilms();
         },
         methods: {
-            async getFilms() {
+            async getFilms(pageNumber = 1) {
                 try {
-                    const {data} = await FilmsRepository.get();
-                    this.films = data;
+                    const {data} = await FilmsRepository.get(pageNumber);
+                    this.films = data.data;
+                    this.page = data.page;
+                    this.total = data.total;
                     this.fields = ["filmId", "title", "description"];
                 } catch (error) {
                     console.log(error);
