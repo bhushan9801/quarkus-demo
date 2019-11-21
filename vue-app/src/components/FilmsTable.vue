@@ -3,7 +3,11 @@
     <b-pagination v-model="page.pageNumber" :total-rows="total" :per-page="page.size" aria-controls="film-table"
                   @input="getFilms(page.pageNumber)"></b-pagination>
 
-    <b-table tbody-tr-class="text-md-left" id="film-table" bordered hover :items="films" :fields="fields"></b-table>
+    <b-table tbody-tr-class="text-md-left" id="film-table" bordered hover :items="films" :fields="fields">
+      <template v-slot:cell(filmId)="data">
+        <router-link :to="`/films/${data.value}`">{{data.value}}</router-link>
+      </template>
+    </b-table>
   </div>
 </template>
 
