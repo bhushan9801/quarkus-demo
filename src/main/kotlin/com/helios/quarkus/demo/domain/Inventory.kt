@@ -36,12 +36,12 @@ open class Inventory {
     var refRentals = mutableListOf<Rental>()
 
     override fun toString(): String =
-            "Entity of type: ${javaClass.name} ( " +
-                    "inventoryId = $inventoryId " +
-                    "filmId = $filmId " +
-                    "storeId = $storeId " +
-                    "lastUpdate = $lastUpdate " +
-                    ")"
+        "Entity of type: ${javaClass.name} ( " +
+            "inventoryId = $inventoryId " +
+            "filmId = $filmId " +
+            "storeId = $storeId " +
+            "lastUpdate = $lastUpdate " +
+            ")"
 
     // constant value returned to avoid entity inequality to itself before and after it's update/merge
     override fun hashCode(): Int = 42

@@ -2,6 +2,7 @@ package com.helios.quarkus.demo.domain
 
 import com.helios.quarkus.demo.dto.ActorVO
 import com.helios.quarkus.demo.dto.FilmActorVO
+import com.helios.quarkus.demo.dto.FilmInfoVO
 import com.helios.quarkus.demo.dto.FilmVO
 import com.helios.quarkus.demo.dto.StaffVO
 import com.helios.quarkus.demo.dto.StoreVO
@@ -17,7 +18,19 @@ interface Mappers {
     fun staffToVo(source: Staff): StaffVO
 
     fun storeToVo(source: Store): StoreVO
+
+    @Mappings(
+        Mapping(target = "languageName", source = "language.name"),
+        Mapping(target = "orgLanguageName", source = "orgLanguage.name")
+    )
     fun filmToVO(source: Film): FilmVO
+
+    @Mappings(
+        Mapping(target = "languageName", source = "language.name"),
+        Mapping(target = "orgLanguageName", source = "orgLanguage.name")
+    )
+    fun filmToInfoVO(source: Film): FilmInfoVO
+
     fun filmActorToVO(source: FilmActor): FilmActorVO
 
     @Mappings(

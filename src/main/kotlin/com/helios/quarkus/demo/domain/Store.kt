@@ -40,12 +40,12 @@ open class Store {
     var refAddress: Address? = null
 
     override fun toString(): String =
-            "Entity of type: ${javaClass.name} ( " +
-                    "storeId = $storeId " +
-                    "managerStaffId = $managerStaffId " +
-                    "addressId = $addressId " +
-                    "lastUpdate = $lastUpdate " +
-                    ")"
+        "Entity of type: ${javaClass.name} ( " +
+            "storeId = $storeId " +
+            "managerStaffId = $managerStaffId " +
+            "addressId = $addressId " +
+            "lastUpdate = $lastUpdate " +
+            ")"
 
     // constant value returned to avoid entity inequality to itself before and after it's update/merge
     override fun hashCode(): Int = 42

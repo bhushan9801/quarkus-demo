@@ -23,12 +23,12 @@ open class Actor {
     var lastUpdate: Instant? = null
 
     override fun toString(): String =
-            "Entity of type: ${javaClass.name} ( " +
-                    "actorId = $actorId " +
-                    "firstName = $firstName " +
-                    "lastName = $lastName " +
-                    "lastUpdate = $lastUpdate " +
-                    ")"
+        "Entity of type: ${javaClass.name} ( " +
+            "actorId = $actorId " +
+            "firstName = $firstName " +
+            "lastName = $lastName " +
+            "lastUpdate = $lastUpdate " +
+            ")"
 
     // constant value returned to avoid entity inequality to itself before and after it's update/merge
     override fun hashCode(): Int = 42

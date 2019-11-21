@@ -9,7 +9,7 @@ import VueRouter from "vue-router";
 
 Vue.config.productionTip = false;
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {path: '/films', component: FilmsTable},

@@ -30,12 +30,12 @@ open class City {
     var refCountry: Country? = null
 
     override fun toString(): String =
-            "Entity of type: ${javaClass.name} ( " +
-                    "cityId = $cityId " +
-                    "city = $city " +
-                    "countryId = $countryId " +
-                    "lastUpdate = $lastUpdate " +
-                    ")"
+        "Entity of type: ${javaClass.name} ( " +
+            "cityId = $cityId " +
+            "city = $city " +
+            "countryId = $countryId " +
+            "lastUpdate = $lastUpdate " +
+            ")"
 
     // constant value returned to avoid entity inequality to itself before and after it's update/merge
     override fun hashCode(): Int = 42

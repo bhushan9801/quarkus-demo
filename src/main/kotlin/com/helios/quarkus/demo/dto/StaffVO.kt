@@ -2,7 +2,6 @@ package com.helios.quarkus.demo.dto
 
 
 import java.time.Instant
-import javax.json.bind.annotation.JsonbProperty
 
 data class StaffVO(var staffId: Long? = null,
                    var firstName: String? = null,

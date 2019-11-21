@@ -7,7 +7,7 @@ import javax.inject.Singleton
 import javax.persistence.EntityManager
 
 @Singleton
-class ActorsService(em: EntityManager, val mappers: Mappers) : BaseService<Actor, ActorVO>(em, Actor::class.java) {
+class ActorsService(em: EntityManager, val mappers: Mappers) : BaseService<Actor, ActorVO, ActorVO>(em, Actor::class.java) {
 
     override fun convert(source: Actor): ActorVO = mappers.actorToVO(source)
 }

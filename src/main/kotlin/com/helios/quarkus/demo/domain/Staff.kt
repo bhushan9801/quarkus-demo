@@ -59,19 +59,19 @@ open class Staff {
     var refStores = mutableListOf<Store>()
 
     override fun toString(): String =
-            "Entity of type: ${javaClass.name} ( " +
-                    "staffId = $staffId " +
-                    "firstName = $firstName " +
-                    "lastName = $lastName " +
-                    "addressId = $addressId " +
-                    "email = $email " +
-                    "storeId = $storeId " +
-                    "active = $active " +
-                    "username = $username " +
-                    "password = $password " +
-                    "lastUpdate = $lastUpdate " +
-                    "picture = $picture " +
-                    ")"
+        "Entity of type: ${javaClass.name} ( " +
+            "staffId = $staffId " +
+            "firstName = $firstName " +
+            "lastName = $lastName " +
+            "addressId = $addressId " +
+            "email = $email " +
+            "storeId = $storeId " +
+            "active = $active " +
+            "username = $username " +
+            "password = $password " +
+            "lastUpdate = $lastUpdate " +
+            "picture = $picture " +
+            ")"
 
     // constant value returned to avoid entity inequality to itself before and after it's update/merge
     override fun hashCode(): Int = 42

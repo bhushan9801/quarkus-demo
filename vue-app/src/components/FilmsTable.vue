@@ -3,7 +3,7 @@
     <b-pagination v-model="page.pageNumber" :total-rows="total" :per-page="page.size" aria-controls="film-table"
                   @input="getFilms(page.pageNumber)"></b-pagination>
 
-    <b-table id="film-table" bordered hover :items="films" :fields="fields"></b-table>
+    <b-table tbody-tr-class="text-md-left" id="film-table" bordered hover :items="films" :fields="fields"></b-table>
   </div>
 </template>
 
@@ -32,7 +32,7 @@
                     this.films = data.data;
                     this.page = data.page;
                     this.total = data.total;
-                    this.fields = ["filmId", "title", "description"];
+                    this.fields = ["filmId", "title", "description", "languageName"];
                 } catch (error) {
                     console.log(error);
                 }

@@ -20,11 +20,11 @@ open class Category {
     var lastUpdate: Instant? = null
 
     override fun toString(): String =
-            "Entity of type: ${javaClass.name} ( " +
-                    "categoryId = $categoryId " +
-                    "name = $name " +
-                    "lastUpdate = $lastUpdate " +
-                    ")"
+        "Entity of type: ${javaClass.name} ( " +
+            "categoryId = $categoryId " +
+            "name = $name " +
+            "lastUpdate = $lastUpdate " +
+            ")"
 
     // constant value returned to avoid entity inequality to itself before and after it's update/merge
     override fun hashCode(): Int = 42

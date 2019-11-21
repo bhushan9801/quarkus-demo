@@ -49,16 +49,16 @@ open class Address {
     var refStores = mutableListOf<Store>()
 
     override fun toString(): String =
-            "Entity of type: ${javaClass.name} ( " +
-                    "addressId = $addressId " +
-                    "address = $address " +
-                    "address2 = $address2 " +
-                    "district = $district " +
-                    "cityId = $cityId " +
-                    "postalCode = $postalCode " +
-                    "phone = $phone " +
-                    "lastUpdate = $lastUpdate " +
-                    ")"
+        "Entity of type: ${javaClass.name} ( " +
+            "addressId = $addressId " +
+            "address = $address " +
+            "address2 = $address2 " +
+            "district = $district " +
+            "cityId = $cityId " +
+            "postalCode = $postalCode " +
+            "phone = $phone " +
+            "lastUpdate = $lastUpdate " +
+            ")"
 
     // constant value returned to avoid entity inequality to itself before and after it's update/merge
     override fun hashCode(): Int = 42

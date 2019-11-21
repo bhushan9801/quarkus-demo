@@ -45,15 +45,15 @@ open class Rental {
     var refStaff: Staff? = null
 
     override fun toString(): String =
-            "Entity of type: ${javaClass.name} ( " +
-                    "rentalId = $rentalId " +
-                    "rentalDate = $rentalDate " +
-                    "inventoryId = $inventoryId " +
-                    "customerId = $customerId " +
-                    "returnDate = $returnDate " +
-                    "staffId = $staffId " +
-                    "lastUpdate = $lastUpdate " +
-                    ")"
+        "Entity of type: ${javaClass.name} ( " +
+            "rentalId = $rentalId " +
+            "rentalDate = $rentalDate " +
+            "inventoryId = $inventoryId " +
+            "customerId = $customerId " +
+            "returnDate = $returnDate " +
+            "staffId = $staffId " +
+            "lastUpdate = $lastUpdate " +
+            ")"
 
     // constant value returned to avoid entity inequality to itself before and after it's update/merge
     override fun hashCode(): Int = 42

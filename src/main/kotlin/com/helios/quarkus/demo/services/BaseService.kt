@@ -6,16 +6,15 @@ import com.helios.quarkus.demo.domain.Sort
 import javax.persistence.EntityManager
 import javax.persistence.TypedQuery
 import javax.persistence.criteria.Path
-import javax.validation.Valid
 
-abstract class BaseService<T, V>(private val em: EntityManager, private val clazz: Class<T>) {
+abstract class BaseService<T, V, I>(private val em: EntityManager, private val clazz: Class<T>) {
 
     fun get(id: Long): V {
         return convert(em.find(clazz, id))
     }
 
-    fun list(page: Page): PagedResult<V> {
-        return PagedResult(convertList(buildCriteriaQuery(page).resultList), getTotalCount(), page)
+    fun list(page: Page): PagedResult<I> {
+        return PagedResult(convertInfoList(buildCriteriaQuery(page).resultList), getTotalCount(), page)
     }
 
     private fun buildCriteriaQuery(page: Page): TypedQuery<T> {
@@ -50,5 +49,15 @@ abstract class BaseService<T, V>(private val em: EntityManager, private val claz
         return list
     }
 
+    private fun convertInfoList(source: List<T>): List<I> {
+        val list = mutableListOf<I>()
+        source.forEach { list.add(convertInfo(it)) }
+        return list
+    }
+
     protected abstract fun convert(source: T): V
+
+    protected open fun convertInfo(source: T): I {
+        TODO("BaseService.convertInfo")
+    }
 }

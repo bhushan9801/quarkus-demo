@@ -1,11 +1,6 @@
 package com.helios.quarkus.demo.rest
 
-import com.helios.quarkus.demo.domain.Actor
-import com.helios.quarkus.demo.domain.Film
 import com.helios.quarkus.demo.domain.Mappers
-import com.helios.quarkus.demo.domain.Staff
-import com.helios.quarkus.demo.dto.StaffVO
-import javax.inject.Inject
 import javax.persistence.EntityManager
 import javax.ws.rs.Consumes
 import javax.ws.rs.GET
