@@ -1,7 +1,7 @@
 import '@babel/polyfill'
 import 'mutationobserver-shim'
 import Vue from 'vue'
-import './plugins/bootstrap-vue'
+import './plugins/buefy'
 import App from './App.vue'
 import FilmsTable from "./components/FilmsTable";
 import HelloWorld from "./components/HelloWorld";
@@ -15,7 +15,7 @@ Vue.use(VueRouter);
 const routes = [
   {path: '/films', component: FilmsTable},
   {path: '/films/:id', component: FilmsView},
-  {path: '/hello', component: HelloWorld}
+  {path: '/', component: HelloWorld}
 ];
 
 const router = new VueRouter({
