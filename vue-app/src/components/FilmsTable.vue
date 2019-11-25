@@ -32,7 +32,7 @@
         methods: {
             async getFilms(pageNumber = 1) {
                 try {
-                    const {data} = await FilmsRepository.get(pageNumber);
+                    const {data} = await FilmsRepository.list(pageNumber);
                     this.films = data.data;
                     this.page = data.page;
                     this.total = data.total;

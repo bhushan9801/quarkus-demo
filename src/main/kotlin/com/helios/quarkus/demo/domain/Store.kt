@@ -26,18 +26,18 @@ open class Store {
     @field:Column(name = "last_update", nullable = false)
     var lastUpdate: Instant? = null
 
-    @field:OneToMany(mappedBy = "refStore", fetch = FetchType.LAZY)
-    var refCustomers = mutableListOf<Customer>()
-    @field:OneToMany(mappedBy = "refStore", fetch = FetchType.LAZY)
-    var refInventories = mutableListOf<Inventory>()
-    @field:OneToMany(mappedBy = "refStore", fetch = FetchType.LAZY)
-    var refStaffs = mutableListOf<Staff>()
+    @field:OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    var customers = mutableListOf<Customer>()
+    @field:OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    var inventories = mutableListOf<Inventory>()
+    @field:OneToMany(mappedBy = "store", fetch = FetchType.LAZY)
+    var staffs = mutableListOf<Staff>()
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "manager_staff_id", referencedColumnName = "staff_id")
-    var refStaff: Staff? = null
+    var staff: Staff? = null
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "address_id", referencedColumnName = "address_id")
-    var refAddress: Address? = null
+    var address: Address? = null
 
     override fun toString(): String =
         "Entity of type: ${javaClass.name} ( " +

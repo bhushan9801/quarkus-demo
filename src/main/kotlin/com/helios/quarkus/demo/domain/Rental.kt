@@ -36,13 +36,13 @@ open class Rental {
 
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "inventory_id", referencedColumnName = "inventory_id")
-    var refInventory: Inventory? = null
+    var inventory: Inventory? = null
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "customer_id", referencedColumnName = "customer_id")
-    var refCustomer: Customer? = null
+    var customer: Customer? = null
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "staff_id", referencedColumnName = "staff_id")
-    var refStaff: Staff? = null
+    var staff: Staff? = null
 
     override fun toString(): String =
         "Entity of type: ${javaClass.name} ( " +

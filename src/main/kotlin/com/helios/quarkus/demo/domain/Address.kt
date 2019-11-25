@@ -40,13 +40,13 @@ open class Address {
 
     @field:ManyToOne(fetch = FetchType.LAZY, optional = false)
     @field:JoinColumn(name = "city_id", referencedColumnName = "city_id")
-    var refCity: City? = null
-    @field:OneToMany(mappedBy = "refAddress", fetch = FetchType.LAZY)
-    var refCustomers = mutableListOf<Customer>()
-    @field:OneToMany(mappedBy = "refAddress", fetch = FetchType.LAZY)
-    var refStaffs = mutableListOf<Staff>()
-    @field:OneToMany(mappedBy = "refAddress", fetch = FetchType.LAZY)
-    var refStores = mutableListOf<Store>()
+    var city: City? = null
+    @field:OneToMany(mappedBy = "address", fetch = FetchType.LAZY)
+    var customers = mutableListOf<Customer>()
+    @field:OneToMany(mappedBy = "address", fetch = FetchType.LAZY)
+    var staffs = mutableListOf<Staff>()
+    @field:OneToMany(mappedBy = "address", fetch = FetchType.LAZY)
+    var stores = mutableListOf<Store>()
 
     override fun toString(): String =
         "Entity of type: ${javaClass.name} ( " +

@@ -27,7 +27,7 @@ open class City {
 
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "country_id", referencedColumnName = "country_id")
-    var refCountry: Country? = null
+    var country: Country? = null
 
     override fun toString(): String =
         "Entity of type: ${javaClass.name} ( " +

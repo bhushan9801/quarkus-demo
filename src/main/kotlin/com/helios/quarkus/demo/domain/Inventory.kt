@@ -28,12 +28,12 @@ open class Inventory {
 
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "film_id", referencedColumnName = "film_id")
-    var refFilm: Film? = null
+    var film: Film? = null
     @field:ManyToOne(fetch = FetchType.LAZY)
     @field:JoinColumn(name = "store_id", referencedColumnName = "store_id")
-    var refStore: Store? = null
-    @field:OneToMany(mappedBy = "refInventory", fetch = FetchType.LAZY)
-    var refRentals = mutableListOf<Rental>()
+    var store: Store? = null
+    @field:OneToMany(mappedBy = "inventory", fetch = FetchType.LAZY)
+    var rentals = mutableListOf<Rental>()
 
     override fun toString(): String =
         "Entity of type: ${javaClass.name} ( " +

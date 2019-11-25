@@ -73,7 +73,7 @@ open class Film {
     var filmActors = mutableListOf<FilmActor>()
     @field:OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
     var filmCategories = mutableListOf<FilmCategory>()
-    @field:OneToMany(mappedBy = "refFilm", fetch = FetchType.LAZY)
+    @field:OneToMany(mappedBy = "film", fetch = FetchType.LAZY)
     var inventories = mutableListOf<Inventory>()
 
     override fun toString(): String =

@@ -9,7 +9,7 @@ import javax.persistence.criteria.Path
 
 abstract class BaseService<T, V, I>(private val em: EntityManager, private val clazz: Class<T>) {
 
-    fun get(id: Long): V {
+    fun get(id: Int): V {
         return convert(em.find(clazz, id))
     }
 

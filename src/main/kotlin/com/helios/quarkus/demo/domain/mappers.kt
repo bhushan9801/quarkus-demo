@@ -9,8 +9,9 @@ import com.helios.quarkus.demo.dto.StoreVO
 import org.mapstruct.Mapper
 import org.mapstruct.Mapping
 import org.mapstruct.Mappings
+import org.mapstruct.ReportingPolicy
 
-@Mapper(componentModel = "cdi")
+@Mapper(componentModel = "cdi", unmappedSourcePolicy = ReportingPolicy.WARN)
 interface Mappers {
     fun actorToVO(source: Actor?): ActorVO
 

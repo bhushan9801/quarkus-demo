@@ -1,6 +1,7 @@
 package com.helios.quarkus.demo.dto
 
 
+import org.mapstruct.MapperConfig
 import java.time.Instant
 
 class FilmVO(var filmId: Long? = null,
@@ -16,7 +17,6 @@ class FilmVO(var filmId: Long? = null,
              var rating: String? = null,
              var lastUpdate: Instant? = null,
              var specialFeatures: Array<String>? = null,
-             var fulltext: String? = null,
              var filmActors: List<ActorVO>? = null)
 
 class FilmInfoVO(var filmId: Long? = null,
@@ -31,5 +31,4 @@ class FilmInfoVO(var filmId: Long? = null,
                  var replacementCost: String? = null,
                  var rating: String? = null,
                  var lastUpdate: Instant? = null,
-                 var specialFeatures: Array<String>? = null,
-                 var fulltext: String? = null)
+                 var specialFeatures: Array<String>? = null)

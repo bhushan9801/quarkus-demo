@@ -21,8 +21,8 @@ open class Country {
     @field:Column(name = "last_update", nullable = false)
     var lastUpdate: Instant? = null
 
-    @field:OneToMany(mappedBy = "refCountry", fetch = FetchType.LAZY)
-    var refCities = mutableListOf<City>()
+    @field:OneToMany(mappedBy = "country", fetch = FetchType.LAZY)
+    var cities = mutableListOf<City>()
 
     override fun toString(): String =
         "Entity of type: ${javaClass.name} ( " +
