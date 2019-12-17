@@ -11,10 +11,9 @@ open class MetricsResourceTest {
     @Test
     fun testHelloEndpoint() {
         given()
-          .`when`().get("/hello")
+          .`when`().get("/ping")
           .then()
              .statusCode(200)
-             .body(`is`("hello"))
     }
 
 }
